@@ -1,6 +1,29 @@
 <?php
 
-class Router
+namespace MusicBoxApp;
+
+class Routes
+{
+    private array $routes;
+
+    public function __construct()
+    {
+        $this->routes = [
+            '' => 'MainPage/',
+            '/search' => 'Mainpage/Search',
+            '/search?page={num}' => 'MainPage/search/page',
+            '/main_page/search?page={num}' => 'MainPage/search/page',
+            '/main_page/check' => 'MainPage/check'
+        ];
+    }
+
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+}
+
+/*class Router
 {
     public function __construct()
     {
@@ -16,11 +39,11 @@ class Router
         $controller_name = ucfirst($first_path_name_el[0]) . ucfirst($first_path_name_el[1]) . 'Controller';
 
         $filepath = 'controllers/' . $controller_name . '.php';
-        require_once $filepath;
+        App\Autoloader\spl_autoload_register($filepath);
         $controller = new $controller_name();
 
         $second_path_name_el = $url_path_elements[1];
         if (isset($url_path_elements[1]))
             $controller->$second_path_name_el();
     }
-}
+}*/

@@ -12,8 +12,12 @@
 
 <div class="jumbotron text-center">
   <div class="text-right">
-    <button type="button">Sign in</button>
-    <button type="button">Sign up</button>
+      <?php
+        if ($authorize):
+            include_once VIEW_DIR_PATH.'/blocks/view_song_element.php';
+        else:
+            include_once VIEW_DIR_PATH.'/blocks/profile_buttons.php';
+      endif; ?>
   </div>
   <h1>MusicBox</h1>
   <p>Listen to high quality music on MusicBox!</p>
@@ -32,7 +36,7 @@
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
     </div>
     <div class="col-sm-4">
-      <h3>Choose your playlist</h3>
+      <h3>Make your playlist</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
     </div>

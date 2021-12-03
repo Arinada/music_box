@@ -9,9 +9,24 @@ class Routes
     public function __construct()
     {
         $this->routes = [
-            '' => 'MainPage/',
-            '/search' => 'Mainpage/Search',
-            '/search?page={num}' => 'MainPage/search/page',
+            '/' => array
+                (
+                    'classname' => 'MainPage',
+                    'method' => null,
+                    'params' => array()
+                ),
+            '/search' => array
+                (
+                    'classname' => 'MainPage',
+                    'method' => 'search',
+                    'params' => array()
+                ),
+            '/search?page={num}' => array
+                (
+                    'classname' => 'MainPage',
+                    'method' => 'search',
+                    'params' => array( 'page' => null)
+                ),
             '/main_page/search?page={num}' => 'MainPage/search/page',
             '/main_page/check' => 'MainPage/check'
         ];

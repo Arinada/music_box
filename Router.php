@@ -16,6 +16,7 @@ class Router
             //$matches_counter = preg_match_all($url_mask, $key);
             if (stristr($key, $url_str, true) !== false) {
                 $controller_data = $value;
+                break;
             }
         }
 
@@ -24,21 +25,24 @@ class Router
 
     private function callController($controller_data)
     {
-        $controller_data_array = explode('/', $controller_data);
-
-        $controller_classname = NAMESPACE_CONTROLLER_PREFIX . $controller_data_array[0];
-        $controller_method = $controller_data_array[1];
-        $controller_param_name = $controller_data_array[2];
+        $controller_str_classname = $controller_data['classname'];
+        $controller_classname = NAMESPACE_CONTROLLER_PREFIX . $controller_str_classname;
+        $controller_method = $controller_data['method'];
+        $controller_param_name = null;
+        foreach ($controller_data['params'] as $param_name) {
+            $controller_param_name = $param_name;
+            break;
+        }
         $controller_param_value = $_GET[$controller_param_name];
         $controller = null;
 
         if ($controller_classname !== null) {
-            $controller = new $controller_classname();
+            $controller = new  $controller_classname($controller_str_classname);
         }
-        if ($controller_method !== null && $controller_param_value == null) {
+        if (($controller_method !== null && $controller_method !== "") && $controller_param_value === null) {
             $controller->$controller_method();
         }
-        if ($controller_method !== null && $controller_param_value != null) {
+        if ($controller_method !== null && $controller_param_value !== null) {
             $controller->$controller_method($controller_param_value);
         }
     }

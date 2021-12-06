@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="../../js/search_panel.js"></script>
   <link rel="stylesheet" href="../css/main_page/styles.css">
 
   <script src="../../js/search_panel.js"></script>
@@ -65,16 +66,14 @@
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <input type="text" class="form-control" name="search_by" id="search_by" placeholder="Search term...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-default"  onclick="showSearchValue()" type="button"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
         </div>
     </div>
 </div>
-
-
 
 </body>
 </html>

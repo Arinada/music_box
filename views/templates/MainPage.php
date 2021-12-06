@@ -5,13 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/main_page/styles.css">
+
+  <script src="../../js/search_panel.js"></script>
 </head>
 <body>
 
 <div class="jumbotron text-center">
-  <div class="text-right">
+  <div class="text-right" id="shift-right">
       <?php
         if ($authorize):
             include_once VIEW_DIR_PATH.'/blocks/view_song_element.php';
@@ -43,37 +46,35 @@
   </div>
 </div>
 <!-- search panel-->
-<link rel="stylesheet" href="../css/main_page/styles.css">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!--script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script!-->
 <!------ Include the above in your HEAD tag ---------->
 <div class="container" id="search_id">
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <div class="input-group">
-        <div class="input-group-btn search-panel">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span id="search_concept">Filter by</span> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#contains">Contains</a></li>
-            <li><a href="#its_equal">It's equal</a></li>
-            <li><a href="#greather_than">Greather than ></a></li>
-            <li><a href="#less_than">Less than < </a></li>
-            <li class="divider"></li>
-            <li><a href="#all">Anything</a></li>
-          </ul>
-        </div>
-        <input type="hidden" name="search_param" value="all" id="search_param">
-        <input type="text" class="form-control" name="x" placeholder="Search term...">
-        <span class="input-group-btn">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#contains">Contains</a></li>
+                        <li><a href="#its_equal">It's equal</a></li>
+                        <li><a href="#greather_than">Start with</a></li>
+                        <li><a href="#less_than">Less than < </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+
 
 </body>
 </html>

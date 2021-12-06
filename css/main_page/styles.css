@@ -5,3 +5,12 @@
 #shift-right {
     margin-right: 1%;
 }
+
+.audio {
+    height: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    margin-top: 3%;
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace MusicBoxApp;
+namespace MusicBoxApp\Routes;
 
 class Router
 {

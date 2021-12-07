@@ -18,6 +18,8 @@ class Psr4AutoloaderClass
         $this->addNamespace(NAMESPACE_APP_PREFIX . 'Routes\\', __DIR__ . '/route');
         $this->addNamespace(NAMESPACE_CONTROLLER_PREFIX, CONTROLLER_DIR_PATH);
         $this->addNamespace(NAMESPACE_VIEW_PREFIX, VIEW_DIR_PATH);
+        $this->addNamespace(NAMESPACE_MODEL_PREFIX, __DIR__ . '/models');
+        $this->addNamespace(NAMESPACE_CONFIG_PREFIX, __DIR__ . '/models/config');
     }
 
     public function addNamespace($prefix, $base_dir, $prepend = false)

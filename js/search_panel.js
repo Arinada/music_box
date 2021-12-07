@@ -11,5 +11,5 @@
 
 function showSearchValue() {
     $search_by = document.getElementById("search_by").value;
-    alert ($search_by);
+    alert($search_by);
 }

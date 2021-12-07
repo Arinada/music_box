@@ -1,5 +1,4 @@
 <?php
-
  //require 'MainPage.php';
    require_once 'PSR4AutoloaderClass.php';
 
@@ -18,6 +17,5 @@
    $loader->addNamespace(NAMESPACE_CONTROLLER_PREFIX, CONTROLLER_DIR_PATH);
    $loader->addNamespace(NAMESPACE_VIEW_PREFIX, VIEW_DIR_PATH);
 
-   $routes_obj = new MusicBoxApp\Routes();
-   $routes = $routes_obj->getRoutes();
-   $router = new MusicBoxApp\Router($routes);
+   $router = new MusicBoxApp\Router();
+   $router->callRoute();

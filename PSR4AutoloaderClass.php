@@ -79,11 +79,6 @@ class Psr4AutoloaderClass
             return false;
         }
 
-        if ($prefix === NAMESPACE_VIEW_PREFIX) {
-            $file_extension = '.html';
-        }
-
-
         // look through base directories for this namespace prefix
         foreach ($this->prefixes[$prefix] as $base_dir) {
 
@@ -93,13 +88,6 @@ class Psr4AutoloaderClass
             $file = $base_dir
                 . str_replace('\\', '/', $relative_class)
                 . $file_extension;
-
-            if ($file_extension === '.html') {
-                if ($this->includeFile($file)) {
-                    // yes, we're done
-                    return $file;
-                }
-            }
 
             // if the mapped file exists, require it
             if ($this->requireFile($file)) {

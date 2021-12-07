@@ -1,6 +1,6 @@
 <?php
 
-namespace Example;
+namespace MusicBoxApp\Autoloader;
 
 class Psr4AutoloaderClass
 {
@@ -9,6 +9,16 @@ class Psr4AutoloaderClass
     public function register()
     {
         spl_autoload_register(array($this, 'loadClass'));
+        $this->addMyNamespaces();
+    }
+
+    public function addMyNamespaces()
+    {
+        $this->addNamespace(NAMESPACE_APP_PREFIX, __DIR__);
+        $this->addNamespace(NAMESPACE_APP_PREFIX . 'Routes\\', __DIR__ . '/route');
+        //$loader->addNamespace(NAMESPACE_APP_PREFIX . 'Autoloader', __DIR__);
+        $this->addNamespace(NAMESPACE_CONTROLLER_PREFIX, CONTROLLER_DIR_PATH);
+        $this->addNamespace(NAMESPACE_VIEW_PREFIX, VIEW_DIR_PATH);
     }
 
     public function addNamespace($prefix, $base_dir, $prepend = false)
@@ -64,10 +74,16 @@ class Psr4AutoloaderClass
 
     protected function loadMappedFile($prefix, $relative_class)
     {
+        $file_extension = '.php';
         // are there any base directories for this namespace prefix?
         if (isset($this->prefixes[$prefix]) === false) {
             return false;
         }
+
+        if ($prefix === NAMESPACE_VIEW_PREFIX) {
+            $file_extension = '.html';
+        }
+
 
         // look through base directories for this namespace prefix
         foreach ($this->prefixes[$prefix] as $base_dir) {
@@ -77,7 +93,14 @@ class Psr4AutoloaderClass
             // in the relative class name, append with .php
             $file = $base_dir
                 . str_replace('\\', '/', $relative_class)
-                . '.php';
+                . $file_extension;
+
+            if ($file_extension === '.html') {
+                if ($this->includeFile($file)) {
+                    // yes, we're done
+                    return $file;
+                }
+            }
 
             // if the mapped file exists, require it
             if ($this->requireFile($file)) {
@@ -98,4 +121,14 @@ class Psr4AutoloaderClass
         }
         return false;
     }
+
+    protected function includeFile($file)
+    {
+        if (file_exists($file)) {
+            include $file;
+            return true;
+        }
+        return false;
+    }
+
 }

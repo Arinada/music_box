@@ -16,7 +16,6 @@ class Psr4AutoloaderClass
     {
         $this->addNamespace(NAMESPACE_APP_PREFIX, __DIR__);
         $this->addNamespace(NAMESPACE_APP_PREFIX . 'Routes\\', __DIR__ . '/route');
-        //$loader->addNamespace(NAMESPACE_APP_PREFIX . 'Autoloader', __DIR__);
         $this->addNamespace(NAMESPACE_CONTROLLER_PREFIX, CONTROLLER_DIR_PATH);
         $this->addNamespace(NAMESPACE_VIEW_PREFIX, VIEW_DIR_PATH);
     }

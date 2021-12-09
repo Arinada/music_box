@@ -4,8 +4,18 @@ namespace MusicBoxApp\Models;
 
 class User
 {
-    private int $id;
-    private string $name;
-    private string $email;
-    private string $password;
+    public int $id;
+    public string $name;
+    public string $email;
+    public string $password;
+
+    protected array $fields_description = [
+        'id' => ['type' => 'INT', 'attributes' => 'AUTO_INCREMENT PRIMARY KEY'],
+        'name' => ['type' => 'VARCHAR', 'length' => 200, 'attributes' => 'NOT NULL'],
+        'email' => ['type' => 'VARCHAR', 'length' => 150, 'attributes' => 'NOT NULL UNIQUE'],
+        'password' => ['type' => 'VARCHAR', 'length' => 80, 'attributes' => 'NOT NULL'],
+        'constraints' => 'UNIQUE(name, password)'
+    ];
+
+    protected string $table_name = 'User';
 }

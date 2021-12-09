@@ -28,7 +28,7 @@ class DBClass
         $ar_keys = array_keys($fields_description);
         $fields = null;
 
-        for ($i = 0; $i < $ar_size - 2; $i++) {
+        for ($i = 0; $i < $ar_size - 1; $i++) {
             $field_name = $ar_keys[$i];
             $type = $fields_description[$field_name]['type'];
             $length = $fields_description[$field_name]['length'];
@@ -67,10 +67,16 @@ class DBClass
     public function isTableExist($table_name): bool
     {
         $query = "select 1 from $table_name LIMIT 1";
-        if ($this->execute($query)) {
-            return true;
+        try {
+            mysqli_execute($query);
+        } catch (Exception $e) {
+            return  false;
         }
-        return false;
+        return true;
+    }
+
+    public function selectAllRows(){
+
     }
 
 }

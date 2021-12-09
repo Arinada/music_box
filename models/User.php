@@ -9,7 +9,7 @@ class User
     public string $email;
     public string $password;
 
-    protected array $fields_description = [
+    protected static array $fields_description = [
         'id' => ['type' => 'INT', 'attributes' => 'AUTO_INCREMENT PRIMARY KEY'],
         'name' => ['type' => 'VARCHAR', 'length' => 200, 'attributes' => 'NOT NULL'],
         'email' => ['type' => 'VARCHAR', 'length' => 150, 'attributes' => 'NOT NULL UNIQUE'],
@@ -17,5 +17,5 @@ class User
         'constraints' => 'UNIQUE(name, password)'
     ];
 
-    protected string $table_name = 'User';
+    protected static string $table_name = 'User';
 }

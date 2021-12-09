@@ -10,7 +10,7 @@ class Song extends Entity
     public string $date_added;
     public string $path_on_server;
 
-    protected array $fields_description = [
+    protected static array $fields_description = [
         'id' => ['type' => 'INT', 'attributes' => 'AUTO_INCREMENT PRIMARY KEY'],
         'name' => ['type' => 'VARCHAR', 'length' => 100, 'attributes' => 'NOT NULL'],
         'author' => ['type' => 'VARCHAR', 'length' => 100, 'attributes' => 'NOT NULL'],
@@ -19,5 +19,5 @@ class Song extends Entity
         'constraints' => 'UNIQUE(name, author)'
     ];
 
-    protected string $table_name = 'Song';
+    protected static string $table_name = 'Song';
 }

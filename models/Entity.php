@@ -4,15 +4,14 @@ namespace MusicBoxApp\Models;
 
 class Entity implements EntityObj
 {
-
-    protected array $fields_description;
-    protected string $table_name = 'ENTITY';
+    protected static array $fields_description;
+    protected static string $table_name = 'ENTITY';
 
     public function __construct()
     {
         require_once 'config/config.php';
         $config = getConfig();
-        $db_obj = new DBClass($config);
+        $db_obj = new DBClass();
         $this->db_connection = $db_obj->getConnection($config);
     }
 
@@ -33,9 +32,14 @@ class Entity implements EntityObj
 
     public function createEntity($db_obj)
     {
-        if (!$db_obj->isTableExist($this->table_name)) {
-            $query = $db_obj->createCreateTableQuery($this->table_name, $this->fields_description);
+        if (!$db_obj->isTableExist(self::$table_name)) {
+            $query = $db_obj->createCreateTableQuery(self::$table_name, self::$fields_description);
             $db_obj->execute($query);
         }
+    }
+
+    public static function getAll($db_obj): array
+    {
+        return $db_obj->selectAllRows(self::$table_name);
     }
 }

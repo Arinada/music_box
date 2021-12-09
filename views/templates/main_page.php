@@ -75,7 +75,6 @@
         </div>
     </div>
     <?php
-    $path_to_audio = 'http://192.168.56.2/audio_records/Gspd%20-%20У%20России%20Три%20Пути.mp3';
     include_once VIEW_DIR_PATH . '/templates/blocks/audio_record.php'
     ?>
 </div>

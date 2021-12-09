@@ -18,9 +18,9 @@
     <div class="text-right" id="shift-right">
         <?php
         if ($authorized):
-            include_once VIEW_DIR_PATH . '/blocks/view_song_element.php';
+            include_once VIEW_DIR_PATH . '/templates/blocks/view_song_element.php';
         else:
-            include_once VIEW_DIR_PATH . '/blocks/profile_buttons.php';
+            include_once VIEW_DIR_PATH . '/templates/blocks/profile_buttons.php';
         endif; ?>
     </div>
     <h1>MusicBox</h1>
@@ -75,7 +75,8 @@
         </div>
     </div>
     <?php
-    include_once VIEW_DIR_PATH . '/blocks/audio_record.html'
+    $path_to_audio = 'http://192.168.56.2/audio_records/Gspd%20-%20У%20России%20Три%20Пути.mp3';
+    include_once VIEW_DIR_PATH . '/templates/blocks/audio_record.php'
     ?>
 </div>
 

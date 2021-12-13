@@ -38,8 +38,8 @@ class Entity implements EntityObj
         }
     }
 
-    public static function getAll($db_obj): array
+    public static function getAllSongs($db_obj): array
     {
-        return $db_obj->selectAllRows(self::$table_name);
+        return $db_obj->getAllRows('Song');
     }
 }

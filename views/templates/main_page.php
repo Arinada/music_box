@@ -75,7 +75,11 @@
         </div>
     </div>
     <?php
-    include_once VIEW_DIR_PATH . '/templates/blocks/audio_record.php'
+    foreach ($songs_list as $song_data) {
+        $audio_name = $song_data['name'] . '     ' . $song_data['author'];
+        $path_to_audio = $song_data['path_on_server'];
+        include VIEW_DIR_PATH . '/templates/blocks/audio_record.php';
+    }
     ?>
 </div>
 

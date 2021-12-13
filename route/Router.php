@@ -80,12 +80,12 @@ class Router
         $this->routes = [
             '/' => [
                 'classname' => 'MainPage',
-                'method' => null,
+                'method' => 'showStartPage',
                 'params' => array()
             ],
-            '/search' => [
+            '/all_songs' => [
                 'classname' => 'MainPage',
-                'method' => 'search',
+                'method' => 'showAllSongsList',
                 'params' => array()
             ]
         ];

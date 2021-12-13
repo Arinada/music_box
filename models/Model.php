@@ -4,18 +4,27 @@ namespace MusicBoxApp\Models;
 
 class Model
 {
+    private $db_obj;
+    private $song;
+
     public function __construct()
     {
         require_once 'config/config.php';
         $config = getConfig();
         $db_obj = new DBClass();
-        $this->db_connection = $db_obj->getConnection($config);
-        $song = new Song();
-        $song->createEntity($db_obj);
-        $db_obj->closeConnection();
+        $this->db_obj = $db_obj;
+        $db_obj->getConnection($config);
+        $this->song = new Song();
+        $this->song->createEntity($db_obj);
     }
 
-    public function getAllSongsList() {
+    public function getAllSongsList(): array
+    {
+        return $this->song->getAllSongs($this->db_obj);
+    }
 
+    public function __destruct()
+    {
+       $this->db_obj->closeConnection();
     }
 }

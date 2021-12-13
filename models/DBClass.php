@@ -70,13 +70,30 @@ class DBClass
         try {
             mysqli_execute($query);
         } catch (Exception $e) {
-            return  false;
+            return false;
         }
         return true;
     }
 
-    public function selectAllRows(){
+    public function getAllRows($table_name)
+    {
+        return $this->createSelectAllQuery($table_name);
+    }
 
+    private function createSelectAllQuery($table_name)
+    {
+        $query = "SELECT * FROM $table_name";
+        $result = mysqli_query($this->connection, $query) or die("Bad request: " . mysqli_connect_error());
+        $songs_data = null;
+
+        $counter = 0;
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $songs_data[$counter] = $row;
+                $counter++;
+            }
+        }
+        return $songs_data;
     }
 
 }

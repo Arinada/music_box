@@ -4,8 +4,8 @@ namespace MusicBoxApp\Models;
 
 class Model
 {
-    private $db_obj;
-    private $song;
+    private DBClass $db_obj;
+    private Song $song;
 
     public function __construct()
     {
@@ -25,6 +25,6 @@ class Model
 
     public function __destruct()
     {
-       $this->db_obj->closeConnection();
+        $this->db_obj->closeConnection();
     }
 }

@@ -6,7 +6,7 @@ use MusicBoxApp\Views as Views;
 
 class ErrorController
 {
-    private $view;
+    private Views\View $view;
 
     public function __construct()
     {

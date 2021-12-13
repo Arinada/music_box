@@ -27,4 +27,9 @@ class View
         }
         $this->view_name = $normal_view_name;
     }
+
+    public function renderErrorPage($error_message)
+    {
+        include_once VIEW_DIR_PATH . '/templates/error_page.php';
+    }
 }

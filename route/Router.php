@@ -2,6 +2,7 @@
 
 namespace MusicBoxApp\Routes;
 
+use MusicBoxApp\Controllers as Controllers;
 class Router
 {
     private array $routes;
@@ -14,12 +15,13 @@ class Router
     {
         $this->declareRoutes();
         $url_str = $this->getURLString();
-        $controller_data = '';
+        $controller_data = null;
 
         foreach ($this->routes as $key => $value) {
             //echo '</br> key: ' . $key . " value: " . $value;
             //$matches_counter = preg_match_all($url_mask, $key);
-            if (stristr($key, $url_str, true) !== false) {
+            //if (stristr($key, $url_str, true) !== false) {
+            if ($key === $url_str) {
                 $controller_data = $value;
                 break;
             }
@@ -47,6 +49,9 @@ class Router
             } else {
                 $controller->$controller_method($controller_param_value);
             }
+        } else {
+            $error_controller = new Controllers\ErrorController();
+            $error_controller->showErrorPage('404. Route not found');
         }
     }
 

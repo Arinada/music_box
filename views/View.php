@@ -10,9 +10,8 @@ class View
     {
     }
 
-    public function render($view_name)
+    public function renderStartPage($view_name, $songs_list = null, $authorized = null)
     {
-        $authorized = null;
         $this->normalizeViewName($view_name);
         include_once VIEW_DIR_PATH . '/templates/' . $this->view_name . '.php';
     }

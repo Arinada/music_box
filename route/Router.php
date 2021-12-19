@@ -92,6 +92,11 @@ class Router
                 'classname' => 'MainPage',
                 'method' => 'showAllSongsList',
                 'params' => array()
+            ],
+            '/find_song' => [
+                'classname' => 'MainPage',
+                'method' => 'showSongsBy',
+                'params' => array()
             ]
         ];
     }

@@ -8,6 +8,12 @@
     });
 });*/
 
+$(document).ready(function() {
+    $(".dropdown-menu li a").click(function() {
+        document.getElementById("search_concept").textContent = this.text;
+      //  alert( this.text);
+    });
+});
 
 function showSearchValue() {
     $search_by = document.getElementById("search_by").value;

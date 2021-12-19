@@ -20,4 +20,9 @@ class Song extends Entity
     ];
 
     protected static string $table_name = 'Song';
+
+    public static function getAllSongs($db_obj, $condition, $parameter): array
+    {
+        return $db_obj->getAllRowsBy('Song');
+    }
 }

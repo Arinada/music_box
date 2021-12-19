@@ -9,8 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="../../js/search_panel.js"></script>
     <link rel="stylesheet" href="../css/main_page/styles.css">
-
-    <script src="../../js/search_panel.js"></script>
 </head>
 <body>
 
@@ -53,16 +51,13 @@
         <div class="col-xs-8 col-xs-offset-2">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <button id="btn_filter_by" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span id="search_concept">Filter by</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#contains">Contains</a></li>
-                        <li><a href="#its_equal">It's equal</a></li>
-                        <li><a href="#greather_than">Start with</a></li>
-                        <li><a href="#less_than">Less than < </a></li>
-                        <li class="divider"></li>
-                        <li><a href="#all">Anything</a></li>
+                        <li><a href="find_song#contain">Contain</a></li>
+                        <li><a href="find_song#its_equal">Equal</a></li>
+                        <li><a href="find_song#start_with">Start with</a></li>
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">

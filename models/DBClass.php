@@ -77,12 +77,31 @@ class DBClass
 
     public function getAllRows($table_name)
     {
-        return $this->createSelectAllQuery($table_name);
+        $query = "SELECT * FROM $table_name";
+        return $this->getDataByQuery($query);
     }
 
-    private function createSelectAllQuery($table_name)
+    public function getAllRowsByCondition($table_name, $condition, $parameter)
     {
-        $query = "SELECT * FROM $table_name";
+        $query = $this->getQueryByCondition($table_name, $condition, $parameter);
+        $this->getDataByQuery($query);
+    }
+
+    private function getQueryByCondition($table_name, $condition, $parameter): string
+    {
+        $query = "Select from $table_name WHERE" /* . $param_key*/; //need compare with all table fields?
+
+        if ($condition == 'equal') {
+            $query = $query . "=$parameter";
+        } elseif ($condition == 'start_with') {
+            $query = $query . "LIKE $parameter%";
+        } elseif ($condition == 'contain') {
+            $query = $query . "LIKE %$parameter%";
+        }
+    }
+
+    private function getDataByQuery($query)
+    {
         $result = mysqli_query($this->connection, $query) or die("Bad request: " . mysqli_connect_error());
         $songs_data = null;
 

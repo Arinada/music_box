@@ -23,8 +23,14 @@ class Model
         return $this->song->getAllSongs($this->db_obj);
     }
 
+    public function findSongsBy($condition, $parameter): array
+    {
+        return $this->song->getAllSongs($this->db_obj, $condition, $parameter);
+    }
+
     public function __destruct()
     {
         $this->db_obj->closeConnection();
     }
+
 }

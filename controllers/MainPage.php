@@ -8,12 +8,14 @@ use MusicBoxApp\Views as Views;
 class MainPage
 {
     private string $view_name;
-    private $view;
+    private Views\View $view;
+    private Model $model;
 
     public function __construct($view_name)
     {
         $this->view_name = $view_name;
         $this->view = new Views\View();
+        $this->model = new Model();
     }
 
     public function showStartPage()
@@ -23,14 +25,14 @@ class MainPage
 
     public function showAllSongsList()
     {
-        $model = new Model();
-        $songs_list = $model->getAllSongsList();
+        $songs_list = $this->model->getAllSongsList();
         $this->view->renderStartPage($this->view_name, $songs_list);
     }
 
-    private function showFoundSongs()
+    private function showSongsBy($condition, $parameter)
     {
-        //TODO
+        $songs_list = $this->model->findSongsBy($condition, $parameter);
+        $this->view->renderStartPage($this->view_name, $songs_list);
     }
 
 }

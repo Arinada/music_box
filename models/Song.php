@@ -21,8 +21,13 @@ class Song extends Entity
 
     protected static string $table_name = 'Song';
 
-    public static function getAllSongs($db_obj, $condition, $parameter): array
+    public static function getAllSongs($db_obj): array
     {
-        return $db_obj->getAllRowsBy('Song');
+        return $db_obj->getAllRows('Song');
+    }
+
+    public static function getAllSongsBy($db_obj, $condition, $parameter): ?array
+    {
+        return $db_obj->getAllRowsByCondition('Song', $condition, $parameter);
     }
 }

@@ -8,23 +8,25 @@
 
 .audio {
     width: 100%;
+    margin-top: 1%;
     height: 30px;
+    margin-bottom: 0;
     background-color: slategrey;
 }
 
 .div-audio-wrapper {
-    margin-right: 20%;
-    margin-left: 20%;
+    margin-right: 25%;
+    margin-left: 25%;
     width: auto;
-    height: 60px;
-    display: block;
-    margin-top: 3%;
+    height: auto;
+    margin-top: 2%;
+    margin-bottom: 1%;
     border-radius: 10px;
     background-color: slategrey;
 }
 
 .audio-title {
-    margin-bottom: 0;
+    margin-bottom: auto;
     margin-left: 4%;
     font-size: 11pt;
     font-weight: 700;

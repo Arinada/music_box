@@ -1,21 +1,37 @@
-/*$(document).ready(function(e){
-    $('.search-panel .dropdown-menu').find('a').click(function(e) {
-        e.preventDefault();
-        var param = $(this).attr("href").replace("#","");
-        var concept = $(this).text();
-        $('.search-panel span#search_concept').text(concept);
-        $('.input-group #search_param').val(param);
-    });
-});*/
+$filter = null;
 
-$(document).ready(function() {
-    $(".dropdown-menu li a").click(function() {
+$(document).ready(function () {
+    $(".dropdown-menu li a").click(function () {
+        $filter = this.text;
         document.getElementById("search_concept").textContent = this.text;
-      //  alert( this.text);
     });
 });
 
-function showSearchValue() {
-    $search_by = document.getElementById("search_by").value;
-    alert($search_by);
+function showSearchValue()
+{
+    let search_by = document.getElementById("search_by").value;
+    if (search_by !== null && search_by !== '') {
+        removeElementsByClass('audios-wrapper');
+        $.ajax({
+            type: 'POST',
+            url: 'find_song',
+            data: ({"condition": $filter, "parameter": search_by}),
+            success: function (data) {
+                if (data) {
+                    let newDiv = document.createElement("div");
+                    newDiv.className = 'audios-wrapper';
+                    document.body.lastChild.after(newDiv);
+                    newDiv.innerHTML += data;
+                }
+            }
+        });
+    }
+}
+
+function removeElementsByClass(className)
+{
+    const elements = document.getElementsByClassName(className);
+    while (elements.length > 0) {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 }

@@ -29,10 +29,16 @@ class MainPage
         $this->view->renderStartPage($this->view_name, $songs_list);
     }
 
-    private function showSongsBy($condition, $parameter)
+    public function showSongsBy($params)
     {
+        if ($params['condition'] == null || $params['condition'] == '') {
+            $params['condition'] = 'Contain';
+        }
+        $condition = $params['condition'];
+        $parameter = $params['parameter'];
+
         $songs_list = $this->model->findSongsBy($condition, $parameter);
-        $this->view->renderStartPage($this->view_name, $songs_list);
+        $this->view->renderSongs($songs_list);
     }
 
 }

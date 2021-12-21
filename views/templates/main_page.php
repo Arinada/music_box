@@ -51,13 +51,14 @@
         <div class="col-xs-8 col-xs-offset-2">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
-                    <button id="btn_filter_by" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <button id="btn_filter_by" type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown">
                         <span id="search_concept">Filter by</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="find_song#contain">Contain</a></li>
-                        <li><a href="find_song#its_equal">Equal</a></li>
-                        <li><a href="find_song#start_with">Start with</a></li>
+                        <li><a>Contain</a></li>
+                        <li><a>Equal</a></li>
+                        <li><a>Start with</a></li>
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">
@@ -69,14 +70,15 @@
             </div>
         </div>
     </div>
-    <?php
-    foreach ($songs_list as $song_data) {
-        $audio_name = $song_data['name'] . '     ' . $song_data['author'];
-        $path_to_audio = $song_data['path_on_server'];
-        include VIEW_DIR_PATH . '/templates/blocks/audio_record.php';
-    }
-    ?>
 </div>
-
+<?php
+echo '<div class="audios-wrapper">';
+foreach ($songs_list as $song_data) {
+    $audio_name = $song_data['name'] . '     ' . $song_data['author'];
+    $path_to_audio = $song_data['path_on_server'];
+    include VIEW_DIR_PATH . '/templates/blocks/audio_record.php';
+}
+echo '</div>';
+?>
 </body>
 </html>

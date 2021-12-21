@@ -81,23 +81,38 @@ class DBClass
         return $this->getDataByQuery($query);
     }
 
-    public function getAllRowsByCondition($table_name, $condition, $parameter)
+    public function getAllRowsByCondition($table_name, $condition, $parameter): ?array
     {
         $query = $this->getQueryByCondition($table_name, $condition, $parameter);
-        $this->getDataByQuery($query);
+        return $this->getDataByQuery($query);
     }
 
     private function getQueryByCondition($table_name, $condition, $parameter): string
     {
-        $query = "Select from $table_name WHERE" /* . $param_key*/; //need compare with all table fields?
+        $query = "Select * from $table_name WHERE ";
+        $fields_array = ['name', 'author'];
+        $or_condition = null;
 
-        if ($condition == 'equal') {
-            $query = $query . "=$parameter";
-        } elseif ($condition == 'start_with') {
-            $query = $query . "LIKE $parameter%";
-        } elseif ($condition == 'contain') {
-            $query = $query . "LIKE %$parameter%";
+        if (count($fields_array) !== 0) {
+            $or_condition = ' OR ';
         }
+
+        for ($i = 0; $i < count($fields_array); $i++) {
+            $query = $query . $fields_array[$i];
+
+            if ($condition === 'Equal') {
+                $query = $query . "='$parameter'";
+            } elseif ($condition === 'Start with') {
+                $query = $query . " LIKE '$parameter%'";
+            } elseif ($condition === 'Contain') {
+                $query = $query . " LIKE '%$parameter%'";
+            }
+
+            if ($i !== count($fields_array) - 1) {
+                $query = $query . $or_condition;
+            }
+        }
+        return $query;
     }
 
     private function getDataByQuery($query)

@@ -41,13 +41,14 @@ class Router
             break;
         }
         $controller_param_value = $_GET[$controller_param_name];
+        $controller_param_values = $controller_data['params'];
 
         if ($controller_str_classname !== null) {
             $controller = new  $controller_classname($controller_str_classname);
-            if ($controller_method !== "" && $controller_param_value === null) {
+            if ($controller_method !== "" && $controller_param_value === null && $controller_param_values === null) {
                 $controller->$controller_method();
             } else {
-                $controller->$controller_method($controller_param_value);
+                $controller->$controller_method($controller_param_values);
             }
         } else {
             $error_controller = new Controllers\ErrorController();
@@ -86,17 +87,17 @@ class Router
             '/' => [
                 'classname' => 'MainPage',
                 'method' => 'showStartPage',
-                'params' => array()
+                'params' => null
             ],
             '/all_songs' => [
                 'classname' => 'MainPage',
                 'method' => 'showAllSongsList',
-                'params' => array()
+                'params' => null
             ],
             '/find_song' => [
                 'classname' => 'MainPage',
                 'method' => 'showSongsBy',
-                'params' => array()
+                'params' => ['condition' => $_POST['condition'], 'parameter' => $_POST['parameter']]
             ]
         ];
     }

@@ -74,15 +74,20 @@ class Router
             $url_mask = $url_mask . '/' . $el;
         }
 
-        if ($url_query) {
-            $url_mask = $url_mask . '?' . $url_query;
-        }
+        //if ($url_query) {
+        // $url_mask = $url_mask . '?' . $url_query;
+        //}
 
         return $url_mask;
     }
 
     private function declareRoutes()
     {
+        $page_number = $_POST['page'];
+        if ($page_number === null) {
+            $page_number = 1;
+        }
+
         $this->routes = [
             '/' => [
                 'classname' => 'MainPage',
@@ -97,33 +102,19 @@ class Router
             '/find_song' => [
                 'classname' => 'MainPage',
                 'method' => 'showSongsBy',
-                'params' => ['condition' => $_POST['condition'], 'parameter' => $_POST['parameter']]
+                'params' => ['condition' => $_POST['condition'], 'parameter' => $_POST['parameter'], 'page' => $page_number]
+            ],
+            '/songs_list' => [
+                'classname' => 'SongsListPage',
+                'method' => 'showSongsListPage',
+                'params' => ['page' => $page_number]
+            ],
+            '/songs_list/page' => [
+                'classname' => 'SongsListPage',
+                'method' => 'showSongsListOnPage',
+                'params' => ['page' => $page_number]
             ]
         ];
     }
 
-    /*    private function getURLMask(): string
-        {
-            $url_elements =  parse_url($_SERVER['REQUEST_URI']);
-
-            $url_path =  $url_elements["path"];
-            $url_path =  substr($url_path, 1);
-
-            $url_path_elements =  explode('/', $url_path);
-
-            $url_query = $url_elements["query"];
-            $url_query = stristr($url_query, '=', true);
-
-            $url_mask = '';
-
-            foreach ($url_path_elements as $el) {
-                $url_mask = $url_mask . '/' . $el;
-            }
-
-            if ($url_query) {
-                $url_mask = $url_mask . '?' . $url_query . '=.*';
-            }
-
-            return $url_mask;
-        }*/
 }

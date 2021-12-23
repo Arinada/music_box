@@ -23,12 +23,6 @@ class MainPage
         $this->view->renderStartPage($this->view_name);
     }
 
-    public function showAllSongsList()
-    {
-        $songs_list = $this->model->getAllSongsList();
-        $this->view->renderStartPage($this->view_name, $songs_list);
-    }
-
     public function showSongsBy($params)
     {
         if ($params['condition'] == null || $params['condition'] == '') {
@@ -36,9 +30,15 @@ class MainPage
         }
         $condition = $params['condition'];
         $parameter = $params['parameter'];
+        $page_number = $params['page'];
 
         $songs_list = $this->model->findSongsBy($condition, $parameter);
-        $this->view->renderSongs($songs_list);
+
+        $songsController = new SongsController($this->model);
+        $songs_list_per_page = $songsController->getSongsPerPage($page_number, $songs_list);
+        $pagesCount = $songsController->getPagesCounter($songs_list);
+        $handler = 'ShowSearchedSongsOnPage';
+        $this->view->renderSongs($songs_list_per_page, $pagesCount, $handler);
     }
 
 }

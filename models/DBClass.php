@@ -70,7 +70,7 @@ class DBClass
         return true;
     }
 
-    public function getAllRows($table_name)
+    public function getAllRows($table_name): ?array
     {
         $query = "SELECT * FROM $table_name";
         return $this->getDataByQuery($query);

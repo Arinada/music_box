@@ -33,12 +33,22 @@ class View
         include_once VIEW_DIR_PATH . '/templates/error_page.php';
     }
 
-    public function renderSongs($songs_list)
+    public function renderSongs($songs_list, $pageCount, $handler)
     {
+        echo '<div class="audios-wrapper">';
         foreach ($songs_list as $song_data) {
             $audio_name = $song_data['name'] . '     ' . $song_data['author'];
             $path_to_audio = $song_data['path_on_server'];
             include VIEW_DIR_PATH . '/templates/blocks/audio_record.php';
         }
+
+        include_once VIEW_DIR_PATH . '/templates/blocks/pagination.php';
+        echo '<div class="</div>">';
+    }
+
+    public function renderSongsListPage($view_name)
+    {
+        $this->normalizeViewName($view_name);
+        include_once VIEW_DIR_PATH . '/templates/' . $this->view_name . '.php';
     }
 }

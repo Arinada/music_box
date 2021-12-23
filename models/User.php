@@ -2,7 +2,7 @@
 
 namespace MusicBoxApp\Models;
 
-class User
+class User extends Entity
 {
     public int $id;
     public string $name;

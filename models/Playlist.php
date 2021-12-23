@@ -2,12 +2,12 @@
 
 namespace MusicBoxApp\Models;
 
-class Playlist
+class Playlist extends Entity
 {
     public int $id;
     public static string $name;
 
-    protected array $fields_description = [
+    protected static array $fields_description = [
         'id' => ['type' => 'INT', 'attributes' => 'AUTO_INCREMENT PRIMARY KEY'],
         'name' => ['type' => 'VARCHAR', 'length' => 200, 'attributes' => 'NOT NULL']
     ];

@@ -48,11 +48,6 @@ class DBClass
         return "CREATE TABLE $table_name ($fields)";
     }
 
-    public function createInsertQuery($query)
-    {
-
-    }
-
     public function closeConnection()
     {
         mysqli_close($this->connection);
@@ -99,6 +94,11 @@ class DBClass
 
         for ($i = 0; $i < count($fields_array); $i++) {
             $query = $query . $fields_array[$i];
+
+            if ($parameter === null || $parameter === '') {
+                $query = "Select * from $table_name";
+                break;
+            }
 
             if ($condition === 'Equal') {
                 $query = $query . "='$parameter'";

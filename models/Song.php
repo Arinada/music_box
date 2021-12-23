@@ -21,7 +21,7 @@ class Song extends Entity
 
     protected static string $table_name = 'Song';
 
-    public static function getAllSongs(): array
+    public function getAllSongs(): ?array
     {
         return parent::getDbObj()->getAllRows('Song');
     }

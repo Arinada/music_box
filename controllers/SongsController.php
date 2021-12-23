@@ -2,8 +2,6 @@
 
 namespace MusicBoxApp\Controllers;
 
-use MusicBoxApp\Models\Model;
-
 class SongsController
 {
     private int $songs_per_page = 5;

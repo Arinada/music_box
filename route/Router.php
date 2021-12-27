@@ -18,9 +18,6 @@ class Router
         $controller_data = null;
 
         foreach ($this->routes as $key => $value) {
-            //echo '</br> key: ' . $key . " value: " . $value;
-            //$matches_counter = preg_match_all($url_mask, $key);
-            //if (stristr($key, $url_str, true) !== false) {
             if ($key === $url_str) {
                 $controller_data = $value;
                 break;
@@ -73,10 +70,6 @@ class Router
         foreach ($url_path_elements as $el) {
             $url_mask = $url_mask . '/' . $el;
         }
-
-        //if ($url_query) {
-        // $url_mask = $url_mask . '?' . $url_query;
-        //}
 
         return $url_mask;
     }

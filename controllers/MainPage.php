@@ -36,7 +36,6 @@ class MainPage
         $songsController = new SongsController();
         $songs_list_per_page = $songsController->getSongsPerPage($page_number, $songs_list);
         $pagesCount = $songsController->getPagesCounter($songs_list);
-        $handler = 'ShowSearchedSongsOnPage';
-        $this->view->renderSongs($songs_list_per_page, $pagesCount, $handler);
+        $this->view->renderSongs($songs_list_per_page, $pagesCount);
     }
 }

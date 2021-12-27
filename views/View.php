@@ -33,7 +33,7 @@ class View
         include_once VIEW_DIR_PATH . '/templates/error_page.php';
     }
 
-    public function renderSongs($songs_list, $pageCount, $handler)
+    public function renderSongs($songs_list, $pageCount)
     {
         echo '<div class="audios-wrapper">';
         foreach ($songs_list as $song_data) {

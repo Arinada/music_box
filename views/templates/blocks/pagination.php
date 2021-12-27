@@ -3,7 +3,7 @@
         <ul class="pagination">
             <?php
             for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++)
-                echo "<li class=\"page-item\"><a onclick=\"$handler($pageNum)\" id='page_num' class=\"page-link\" href=\"#$pageNum\">$pageNum</a></li>";
+                echo "<li class=\"page-item\"><a value=\"$pageNum\" id=\"page-num\" class=\"page-link\" href=\"#$pageNum\">$pageNum</a></li>";
             ?>
         </ul>
     </nav>

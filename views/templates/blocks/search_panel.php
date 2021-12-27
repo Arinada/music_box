@@ -16,7 +16,7 @@
                 <input type="hidden" name="search_param" value="all" id="search_param">
                 <input type="text" class="form-control" name="search_by" id="search_by" placeholder="Search term...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" onclick="ShowSearchedSongsOnPage(1)" type="button"><span
+                    <button id="search_btn" class="btn btn-default" type="button"><span
                                 class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>

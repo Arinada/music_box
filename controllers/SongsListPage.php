@@ -29,9 +29,8 @@ class SongsListPage
 
         $songsController = new SongsController();
         $songs_list_per_page = $songsController->getSongsPerPage($page_number, $songs_list);
-        $handler = 'ShowSongsListOnPage';
         $pagesCount = $songsController->getPagesCounter($songs_list);
-        $this->view->renderSongs($songs_list_per_page, $pagesCount, $handler);
+        $this->view->renderSongs($songs_list_per_page, $pagesCount);
     }
 
     public function showSongsListOnPage($params)
@@ -46,8 +45,7 @@ class SongsListPage
         $songsController = new SongsController();
         $songs_list_per_page = $songsController->getSongsPerPage($page_number, $songs_list);
         $pagesCount = $songsController->getPagesCounter($songs_list);
-        $handler = 'ShowSongsListOnPage';
-        $this->view->renderSongs($songs_list_per_page, $pagesCount, $handler);
+        $this->view->renderSongs($songs_list_per_page, $pagesCount);
     }
 
 }

@@ -106,6 +106,11 @@ class Router
                 'classname' => 'SongsListPage',
                 'method' => 'showSongsListOnPage',
                 'params' => ['page' => $page_number]
+            ],
+            '/register_user' => [
+                'classname' => 'Registration',
+                'method' => 'registerUser',
+                'params' => [$_POST['user_data']]
             ]
         ];
     }

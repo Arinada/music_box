@@ -7,6 +7,7 @@ class Entity
     protected static array $fields_description;
     protected static string $table_name = 'ENTITY';
     protected DBClass $db_obj;
+    protected array $fields;
 
     public function __construct()
     {
@@ -29,9 +30,9 @@ class Entity
           }
       }*/
 
-    public static function getAllRows($db_obj): array
+    public function getAllRows(): array
     {
-        return $db_obj->getAllRows(self::$table_name);
+        return $this->getDbObj()->getAllRows(self::$table_name);
     }
 
     public function __destruct()
@@ -43,4 +44,5 @@ class Entity
     {
         return $this->db_obj;
     }
+
 }

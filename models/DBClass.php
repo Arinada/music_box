@@ -2,6 +2,8 @@
 
 namespace MusicBoxApp\Models;
 
+use mysqli;
+
 class DBClass
 {
     private $connection;
@@ -9,12 +11,9 @@ class DBClass
     public function getConnection($config)
     {
         if ($this->connection === null) {
-            $connection = mysqli_connect($config['hostname'], $config['username'], $config['password'], $config['dbname'])
-            or die("Connection failed: " . mysqli_connect_error());
-
-            if (mysqli_connect_errno()) {
-                printf("Connect failed: %s\n", mysqli_connect_error());
-                exit();
+            $connection = new mysqli($config['hostname'], $config['username'], $config['password'], $config['dbname']);
+            if ($connection->connect_error) {
+                die("Connection failed: " . $connection->connect_error);
             } else {
                 $this->connection = $connection;
             }
@@ -50,7 +49,7 @@ class DBClass
 
     public function closeConnection()
     {
-        mysqli_close($this->connection);
+        $this->connection->close();
     }
 
     public function execute($query)
@@ -130,4 +129,93 @@ class DBClass
         return $songs_data;
     }
 
+    public function insertRowUser($fields): bool
+    {
+        $table_name = 'Users';
+        if (!$this->isUserExist($fields)) {
+            $prepared_query = $this->getInsertRowQuery($table_name, $fields);
+            $stmt = $this->connection->prepare($prepared_query);
+            $stmt->bind_param('ssss', $name, $email, $password, $role);
+
+            $name = $fields['name'];
+            $email = $fields['email'];
+            $password = md5($fields['password']);
+            $role = $fields['role'];
+
+            $stmt->execute();
+            $stmt->close();
+            return true;
+        }
+        return false;
+    }
+
+    private function bindParamsForUsersTable(&$stmt, $fields)
+    {
+        $stmt->bind_param('ssss', $name, $email, $password, $role);
+
+        $name = $fields['name'];
+        $email = $fields['email'];
+        $password = $fields['password'];
+        $role = $fields['role'];
+    }
+
+    private function isUserExist($fields): bool
+    {
+        $table_name = 'Users';
+        $prepared_query = $this->getSelectRowQuery($table_name, $fields);
+        $stmt = $this->connection->prepare($prepared_query);
+        $stmt->bind_param('ssss', $name, $email, $password, $role);
+
+        $name = $fields['name'];
+        $email = $fields['email'];
+        $password = md5($fields['password']);
+        $role = $fields['role'];
+
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        if ($result) {
+            return true;
+        }
+        return false;
+    }
+
+    private function getSelectRowQuery($table_name, $fields): string
+    {
+        $values_cond = null;
+        $query = "SELECT 1 FROM $table_name WHERE ";
+        $counter = 0;
+
+        foreach ($fields as $key => $value) {
+            $values_cond = $values_cond . $key . '=?';
+
+            if ($counter != count($fields) - 1) {
+                $values_cond = $values_cond . ' AND ';
+            }
+            $counter++;
+        }
+        return $query . $values_cond;
+    }
+
+    private function getInsertRowQuery($table_name, $fields): string
+    {
+        $fields_str = '(';
+        $values_cond = '(';
+        $counter = 0;
+
+        foreach ($fields as $key => $value) {
+            $fields_str = $fields_str . $key;
+            $values_cond = $values_cond . '?';
+
+            if ($counter != count($fields) - 1) {
+                $fields_str = $fields_str . ',';
+                $values_cond = $values_cond . ',';
+            }
+            $counter++;
+        }
+        $fields_str = $fields_str . ')';
+        $values_cond = $values_cond . ')';
+        return "INSERT INTO $table_name $fields_str VALUES $values_cond";
+    }
 }

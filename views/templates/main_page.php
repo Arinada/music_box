@@ -13,10 +13,13 @@
 include_once VIEW_DIR_PATH . '/templates/layouts/header.php';
 include_once VIEW_DIR_PATH . '/templates/blocks/introduction_info.php';
 include_once VIEW_DIR_PATH . '/templates/blocks/search_panel.php';
+include_once VIEW_DIR_PATH . '/templates/registration_form.php';
+include_once VIEW_DIR_PATH . '/templates/layouts/authorization_form.php';
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="http://192.168.56.2/js/search_songs.js"></script>
+<script src="http://192.168.56.2/js/registration_form.js"></script>
 <script src="http://192.168.56.2/js/common_functions.js"></script>
 </body>
 </html>
